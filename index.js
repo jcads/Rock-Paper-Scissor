@@ -1,6 +1,7 @@
 var plays =["Rock", "Paper", "Scissor"];
+var i = 0;
 
-function computerPlay() {
+function computer() {
 	return Math.floor(Math.random() * 3);
 }
 
@@ -14,16 +15,39 @@ function playRound(player, computer) {
 	}
 }
 
-function game() {
-	for (var i = 0; i < 5; i++) {
-		const playerSelection = prompt("Choose:\n\t(1)Rock\n\t(2)Paper\n\t(3)Scissor");
-		const computerSelection = computerPlay();
-		console.log("You: " + plays[playerSelection-1]);
-		console.log("Computer: " + plays[computerSelection]);
-		console.log(playRound(playerSelection, computerSelection));
+var choice;
+var buttons = document.querySelectorAll(".btn");
+var computerSelection = computer();
+var computerMove = document.getElementById("computer-move");
+
+function play() {
+	buttons.forEach(button => {
+		button.classList.remove("selected");
+
+		button.addEventListener("click", function(e) {
+			var result = playRound(e.target.classList[1], computerSelection);
+	
+			document.querySelector("h3").textContent = result;
+			computerMove.setAttribute("src", 
+					"images/"+plays[computerSelection] + ".png");
+			button.classList.add("selected");
+			clearInterval(startShuffle);
+			
+		});
+	});
+	
+	var shuffle = () => {
+		computerMove.setAttribute("src", 
+				"images/"+plays[i++] + ".png");
+	
+		if (i == plays.length) i = 0;
 	}
+	
+	var startShuffle = setInterval(shuffle, 75);
+	playBtn.textContent = "Play Again";
 }
 
-document.querySelector("button").addEventListener("click", function () {
-	game();
-})
+var playBtn = document.querySelector(".play");
+playBtn.addEventListener("click", () => play());
+
+
