@@ -6,6 +6,18 @@ body {
 	margin: 0 auto;
 }
 
+.score-board {
+	position: absolute;
+}
+
+.pc {
+	left: 75%;
+}
+
+.pl {
+	left: 15%;
+}
+
 button {
 	display: block;
 	/* margin: 3% auto; */
@@ -18,9 +30,10 @@ button {
 }
 
 #computer-move {
+	width: 160px;
 	transform: scaleX(-1);
 	position: relative;
-	left: 18%;
+	left: 10%;
 	top: 5.8rem;
 }
 
